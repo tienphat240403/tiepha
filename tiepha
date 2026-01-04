@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bức Thư Bất Ngờ</title>
+    <style>
+        /* PHẦN CSS - Thiết kế giao diện */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fae1dd; /* Màu nền hồng nhạt */
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        /* Khung bao quanh phong bì */
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: #f08080; /* Màu đỏ hồng của phong bì */
+            margin: 0 auto 100px auto;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Nắp phong bì */
+        .cap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #f4978e;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 3;
+        }
+
+        /* Lá thư bên trong */
+        .letter {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 90%;
+            background: #ffffff;
+            border-radius: 5px;
+            z-index: 2;
+            transition: transform 1.5s ease-in-out; /* Hiệu ứng đi ra từ từ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Dòng chữ Hello Bạn */
+        .text-neon {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff0050;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff0050, 0 0 20px #ff4d8d;
+            opacity: 0;
+            transition: opacity 1s ease 1s; /* Hiện ra sau khi thư đã kéo lên */
+            margin: 0;
+        }
+
+        /* Hiệu ứng khi mở */
+        .envelope-wrapper.open .cap {
+            transform: rotateX(180deg);
+            z-index: 1; /* Đẩy nắp ra sau để thấy thư */
+        }
+
+        .envelope-wrapper.open .letter {
+            transform: translate(-50%, -130px); /* Lá thư trượt lên trên */
+        }
+
+        .envelope-wrapper.open .text-neon {
+            opacity: 1;
+        }
+
+        /* Nút bấm */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #ff4d8d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 141, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff0050;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 0, 80, 0.5);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="envelope-wrapper" id="envelope">
+            <div class="cap"></div>
+            <div class="letter">
+                <p class="text-neon">Ngủ đê ! ✨</p>
+            </div>
+        </div>
+        
+        <button onclick="toggleEnvelope()" id="btn">Mở Thư 💌</button>
+    </div>
+
+    <script>
+        /* PHẦN JAVASCRIPT - Điều khiển đóng mở */
+        function toggleEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const btn = document.getElementById('btn');
+            
+            envelope.classList.toggle('open');
+            
+            if (envelope.classList.contains('open')) {
+                btn.innerText = "Đóng Thư Lại";
+            } else {
+                btn.innerText = "Mở Thư 💌";
+            }
+        }
+    </script>
+
+</body>
+</html>
